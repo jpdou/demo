@@ -11,11 +11,9 @@ namespace App\Model;
 
 class Actress
 {
-    private $video;
-
     public function __construct(
-        VideoInterface $video
+
     ) {
-        $this->video = $video;
+
     }
 }

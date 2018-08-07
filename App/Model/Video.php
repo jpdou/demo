@@ -9,13 +9,12 @@
 namespace App\Model;
 
 
-class Video implements VideoInterface
+class Video extends AbstractModel implements VideoInterface
 {
-    private $actress;
 
     public function __construct(
-        //Actress $actress
     ) {
-        //$this->actress = $actress;
+        parent::__construct();
+        $this->table = "video";
     }
 }
