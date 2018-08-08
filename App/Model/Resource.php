@@ -56,7 +56,7 @@ class Resource
 
     public function getSelect()
     {
-        return $this->select;
+        return clone $this->select;
     }
 
     /**

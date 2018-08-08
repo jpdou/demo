@@ -15,5 +15,12 @@ return [
 
     'preferences' => [
         'App\Model\VideoInterface' => 'App\Model\Video',
+    ],
+
+    'routers' => [
+        'Videos' => '#^videos#',
+        'Actresses' => '#^actresses#',
+        'User/SubscribedActresses' => '#^(user)\/([0-9]*)\/subscribed_actresses#',
+        'User/SubscribedVideos' => '#^(user)\/([0-9]*)\/subscribed_videos#',
     ]
 ];

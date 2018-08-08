@@ -11,6 +11,7 @@ namespace App\Model;
 abstract class AbstractModel
 {
     protected $resource;
+    protected $objectManager;
 
     protected $table;
 
@@ -19,6 +20,7 @@ abstract class AbstractModel
     public function __construct()
     {
         $this->resource = Resource::getInstance();
+        $this->objectManager = ObjectManager::getInstance();
     }
 
     public function load($value, $filed="id", $columns=null)
@@ -58,5 +60,18 @@ abstract class AbstractModel
             return isset($this->data[$key]) ? $this->data[$key] : null;
         }
         return null;
+    }
+
+    public function getTable()
+    {
+        return $this->table;
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getCollection()
+    {
+        return $this->objectManager->create(Collection::class, [$this]);
     }
 }
