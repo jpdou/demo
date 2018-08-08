@@ -8,9 +8,9 @@
 return [
     'db' => [
         'driver'   => 'Pdo_Mysql',
-        'database' => 'jeasy_cms_db',
-        'username' => 'root',
-        'password' => 'toor',
+        'database' => 'DATABASE',
+        'username' => 'USERNAME',
+        'password' => 'PASSWORD',
     ],
 
     'preferences' => [
