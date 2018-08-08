@@ -1,0 +1,27 @@
+## Default index file
+
+    DirectoryIndex index.php
+
+<IfModule mod_rewrite.c>
+############################################
+## Enable rewrites
+
+    Options +FollowSymLinks
+    RewriteEngine on
+
+## Never rewrite for existing files, directories and links
+
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-l
+
+############################################
+## Rewrite everything else to index.php
+
+    RewriteRule .* index.php [L]
+
+</IfModule>
+
+# For 404s and 403s that aren't handled by the application, show plain 404 response
+ErrorDocument 404 /errors/404.php
+ErrorDocument 403 /errors/404.php
