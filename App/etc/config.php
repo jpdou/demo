@@ -8,13 +8,13 @@
 return [
     'db' => [
         'driver'   => 'Pdo_Mysql',
-        'database' => 'jeasy_cms_db',
+        'database' => 'crawler',
         'username' => 'root',
         'password' => 'toor',
     ],
 
     'preferences' => [
-        'App\Model\VideoInterface' => 'App\Model\Video',
+
     ],
 
     'routers' => [
@@ -22,5 +22,9 @@ return [
         'Actresses' => '#^actresses#',
         'User/SubscribedActresses' => '#^(user)\/([0-9]*)\/subscribed_actresses#',
         'User/SubscribedVideos' => '#^(user)\/([0-9]*)\/subscribed_videos#',
+    ],
+
+    'directories' => [
+        'media' => '/media/'
     ]
 ];

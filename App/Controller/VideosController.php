@@ -4,15 +4,19 @@ namespace App\Controller;
 
 use App\Model\Http;
 use App\Model\Http\Request;
+use App\Model\Layout;
 use App\Model\Video;
 
 class VideosController extends AbstractController
 {
+    private $pageCount = 100;
+
     public function __construct(
         Http $http,
-        Request $request
+        Request $request,
+        Layout $layout
     ) {
-        parent::__construct($http, $request);
+        parent::__construct($http, $request, $layout);
         $this->template = 'videos.phtml';
     }
 
@@ -22,7 +26,16 @@ class VideosController extends AbstractController
         $video = $this->objectManager->create(Video::class);
         $videos = $video->getCollection();
         $select = $videos->getSelect();
-        $select->limit(100);
-        return $this->renderTemplate(['videos' => $videos]);
+
+        $page = $this->request->get('p', 1);
+        $page--;
+
+        if ($page < 0) {
+            $page = 0;
+        }
+
+        $select->offset($page * $this->pageCount);
+        $select->limit($this->pageCount);
+        return $this->layout->renderTemplate($this->template, ['videos' => $videos, 'pageCount' => $this->pageCount]);
     }
 }

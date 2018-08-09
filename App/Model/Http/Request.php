@@ -8,17 +8,30 @@
 
 namespace App\Model\Http;
 
-
-use App\Model\AbstractModel;
-
-class Request extends AbstractModel
+class Request
 {
     private $parameters;
 
     public function __construct(
         array $parameters=[]
     ) {
-        parent::__construct();
         $this->parameters = $parameters;
+    }
+
+    public function get($key, $default=null)
+    {
+        if (isset($_POST[$key])) {
+            return (string) $_POST[$key];
+        }
+
+        if (isset($_GET[$key])) {
+            return (string) $_GET[$key];
+        }
+
+        if (isset($this->parameters[$key])) {
+            return (string) $this->parameters[$key];
+        }
+
+        return $default;
     }
 }
