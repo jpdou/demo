@@ -13,7 +13,7 @@ class VideosController extends AbstractController
         Request $request
     ) {
         parent::__construct($http, $request);
-        $this->template = 'videos.php';
+        $this->template = 'videos.phtml';
     }
 
     public function execute()

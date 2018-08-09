@@ -8,7 +8,10 @@
 
 namespace App\Model;
 
-
+/**
+ * Class Video
+ * @package App\Model
+ */
 class Video extends AbstractModel implements VideoInterface
 {
 
@@ -16,5 +19,25 @@ class Video extends AbstractModel implements VideoInterface
     ) {
         parent::__construct();
         $this->table = "video";
+    }
+
+    public function getTitle()
+    {
+        return $this->getData('title');
+    }
+
+    public function getIdentifier()
+    {
+        return $this->getData('identifier');
+    }
+
+    public function getHref()
+    {
+        return $this->getData('href');
+    }
+
+    public function getPoster()
+    {
+        return $this->getData('poster');
     }
 }

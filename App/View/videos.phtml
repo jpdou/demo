@@ -1,0 +1,17 @@
+<?php
+/** @var \App\Model\Collection $videos */
+
+?>
+<?php include "header.phtml" ?>
+<div class="list">
+    <?php /** @var \App\Model\Video $video */ ?>
+    <?php foreach ($videos as $video): ?>
+        <div class="item video-item">
+            <a href="<?= $video->getHref() ?>">
+                <img src="<?= $video->getPoster() ?>" />
+            </a>
+            <span class="title"><?= $video->getTitle() ?></span>
+        </div>
+    <?php endforeach ?>
+</div>
+<?php include "footer.phtml" ?>

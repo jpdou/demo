@@ -72,6 +72,9 @@ abstract class AbstractModel
      */
     public function getCollection()
     {
-        return $this->objectManager->create(Collection::class, [$this]);
+        /** @var Collection $collection */
+        $collection = $this->objectManager->create(Collection::class);
+        $collection->setEntity($this);
+        return $collection;
     }
 }

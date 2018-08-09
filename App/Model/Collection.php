@@ -9,6 +9,8 @@
 namespace App\Model;
 
 
+use Zend\Db\Sql\Select;
+
 class Collection implements \Iterator
 {
     private $resource;
@@ -18,16 +20,20 @@ class Collection implements \Iterator
     private $select;
 
     public function __construct(
-        AbstractModel $entity
     ) {
         $this->resource = Resource::getInstance();
+    }
 
+    public function setEntity(AbstractModel $entity)
+    {
         $this->entity = $entity;
-
         $this->select = $this->resource->getSelect();
         $this->select->from(['e' => $this->entity->getTable()]);
     }
 
+    /**
+     * @return Select
+     */
     public function getSelect()
     {
         return $this->select;
