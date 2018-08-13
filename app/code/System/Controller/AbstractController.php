@@ -6,13 +6,13 @@
  * Time: 11:47
  */
 
-namespace App\Controller;
+namespace System\Controller;
 
 
-use App\Model\Http;
-use App\Model\Http\Request;
-use App\Model\Layout;
-use App\Model\ObjectManager;
+use System\Model\Http;
+use System\Model\Http\Request;
+use System\Model\Layout;
+use System\Model\ObjectManager;
 
 abstract class AbstractController
 {

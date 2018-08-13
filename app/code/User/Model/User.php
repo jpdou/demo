@@ -6,7 +6,7 @@
  * Time: 10:29
  */
 
-namespace App\Model;
+namespace System\Model;
 
 
 class User extends AbstractModel

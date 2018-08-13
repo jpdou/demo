@@ -6,7 +6,7 @@
  * Time: 17:08
  */
 
-namespace App\Model;
+namespace System\Model;
 
 use Zend\Di\Injector;
 

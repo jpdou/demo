@@ -6,10 +6,10 @@
  * Time: 11:57
  */
 
-namespace App\Model;
+namespace System\Model;
 
 
-use App\Model\Http\Request;
+use System\Model\Http\Request;
 
 class Http extends AbstractModel
 {

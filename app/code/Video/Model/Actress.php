@@ -6,7 +6,7 @@
  * Time: 12:25
  */
 
-namespace App\Model;
+namespace Video\Model;
 
 
 class Actress

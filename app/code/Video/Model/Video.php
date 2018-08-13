@@ -6,7 +6,10 @@
  * Time: 10:31
  */
 
-namespace App\Model;
+namespace Video\Model;
+
+use System\Model\AbstractModel;
+use System\Model\Config;
 
 /**
  * Class Video

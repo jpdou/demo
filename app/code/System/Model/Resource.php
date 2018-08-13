@@ -6,7 +6,7 @@
  * Time: 12:29
  */
 
-namespace App\Model;
+namespace System\Model;
 
 use Zend\Db\Adapter\Adapter;
 use Zend\Db\Sql\Select;

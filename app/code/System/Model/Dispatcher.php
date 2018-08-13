@@ -6,11 +6,11 @@
  * Time: 22:20
  */
 
-namespace App\Model;
+namespace System\Model;
 
 
-use App\Controller\AbstractController;
-use App\Model\Http\Request;
+use System\Controller\AbstractController;
+use System\Model\Http\Request;
 
 class Dispatcher
 {

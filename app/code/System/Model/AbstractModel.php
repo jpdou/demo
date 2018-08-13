@@ -6,7 +6,7 @@
  * Time: 16:27
  */
 
-namespace App\Model;
+namespace System\Model;
 
 abstract class AbstractModel
 {

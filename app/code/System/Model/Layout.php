@@ -6,10 +6,10 @@
  * Time: 22:14
  */
 
-namespace App\Model;
+namespace System\Model;
 
 
-use App\Model\Http\Request;
+use System\Model\Http\Request;
 
 class Layout
 {

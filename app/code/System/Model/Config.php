@@ -6,7 +6,7 @@
  * Time: 17:25
  */
 
-namespace App\Model;
+namespace System\Model;
 
 
 class Config

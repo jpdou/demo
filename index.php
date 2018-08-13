@@ -7,21 +7,21 @@
  */
 
 define('__BASE_DIR__',  __DIR__);
-
+define('DS', DIRECTORY_SEPARATOR);
 require "vendor/autoload.php";
 
-set_include_path(get_include_path(). PATH_SEPARATOR. __BASE_DIR__);
+set_include_path(get_include_path(). PATH_SEPARATOR. __BASE_DIR__.DS."app".DS."code");
 
 spl_autoload_register(function ($class) {
     $path = $class. ".php";
     include $path;
 });
 
-$config = new App\Model\Config();
-$objectManager = new App\Model\ObjectManager($config);
+$config = new System\Model\Config();
+$objectManager = new System\Model\ObjectManager($config);
 
-/** @var \App\Model\Dispatcher $dispatcher */
-$dispatcher = $objectManager->get(\App\Model\Dispatcher::class);
+/** @var \System\Model\Dispatcher $dispatcher */
+$dispatcher = $objectManager->get(\System\Model\Dispatcher::class);
 $output = $dispatcher->dispatch();
 
 echo $output;

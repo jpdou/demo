@@ -1,13 +1,14 @@
 <?php
 
-namespace App\Controller;
+namespace Video\Controller\Video;
 
-use App\Model\Http;
-use App\Model\Http\Request;
-use App\Model\Layout;
-use App\Model\Video;
+use System\Model\Http;
+use System\Model\Http\Request;
+use System\Model\Layout;
+use Video\Model\Video;
+use System\Controller\AbstractController;
 
-class VideosController extends AbstractController
+class GridController extends AbstractController
 {
     private $pageCount = 100;
 

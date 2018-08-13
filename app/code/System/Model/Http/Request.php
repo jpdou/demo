@@ -6,7 +6,7 @@
  * Time: 11:58
  */
 
-namespace App\Model\Http;
+namespace System\Model\Http;
 
 class Request
 {
