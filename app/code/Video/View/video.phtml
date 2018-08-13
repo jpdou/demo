@@ -1,0 +1,31 @@
+<?php
+/** @var App\Model\Layout $this */
+/** @var \App\Model\Video $video */
+?>
+<?= $this->renderTemplate("header.phtml")  ?>
+    <div class="video">
+        <?php /** @var \App\Model\Video $video */ ?>
+        <h1><?= $video->getTitle() ?></h1>
+        <div class="detail">
+            <div class="photo">
+                <img src="<?= $video->getPosterUrl() ?>">
+            </div>
+            <div class="info">
+                <div>
+                    <label>番号: </label>
+                    <span><?= $video->getIdentifier() ?></span>
+                </div>
+                <div>
+                    <label>发行时间: </label>
+                    <span><?= substr($video->getDate(), 0, 10) ?></span>
+                </div>
+            </div>
+        </div>
+        <div class="actress">
+
+        </div>
+        <div class="samples">
+
+        </div>
+    </div>
+<?= $this->renderTemplate("footer.phtml") ?>

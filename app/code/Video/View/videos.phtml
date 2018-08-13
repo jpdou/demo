@@ -9,7 +9,7 @@
     <?php /** @var \App\Model\Video $video */ ?>
     <?php foreach ($videos as $video): ?>
         <div class="item video-item">
-            <a href="<?= $video->getHref() ?>">
+            <a href="<?= $video->getUrl() ?>">
                 <img src="<?= $video->getPosterUrl() ?>" />
             </a>
             <p class="date"><?= substr($video->getDate(), 0, 10) ?></p>

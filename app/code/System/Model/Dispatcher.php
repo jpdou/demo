@@ -25,10 +25,11 @@ class Dispatcher
     private $controller;
 
     function __construct(
-        Config $config
+        Config $config,
+        Request $request
     ) {
         $this->config = $config;
-
+        $this->request = $request;
         $this->objectManager = ObjectManager::getInstance();
 
         $this->initialize();
@@ -36,37 +37,8 @@ class Dispatcher
 
     private function initialize()
     {
-        $controllerClass = false;
-        $parameters = [];
-
-        if (isset($_SERVER["REDIRECT_URL"])) {
-            $redirectUrl = ltrim($_SERVER["REDIRECT_URL"], '/');
-            var_dump($redirectUrl);
-
-            $routers = $this->config->get('routers');
-
-            foreach ($routers as $key => $router) {
-                var_dump($router);
-                $matches = [];
-                $result = preg_match($router, $redirectUrl, $matches);
-                if ($result) {
-                    array_shift($matches);  // 丢掉第一个元素
-                    while(count($matches) > 0 && count($matches) % 2 == 0) {
-                        $parameters[array_shift($matches)] = array_shift($matches);
-                    }
-                    $controllerClass = "App".DIRECTORY_SEPARATOR."Controller".DIRECTORY_SEPARATOR.$key."Controller";
-                    break;
-                }
-            }
-        } else {    // 首页
-            $controllerClass = "App".DIRECTORY_SEPARATOR."Controller".DIRECTORY_SEPARATOR.'VideosController';
-        }
-
-        if ($controllerClass == false) {
-            $controllerClass = "App".DIRECTORY_SEPARATOR."Controller".DIRECTORY_SEPARATOR.'NotFoundController';
-        }
-
-        $request = $this->objectManager->create(\App\Model\Http\Request::class, $parameters);
+        $key = $this->request->getControllerKey();
+        $controllerClass = "App".DIRECTORY_SEPARATOR."Controller".DIRECTORY_SEPARATOR.$key."Controller";
 
         $this->controller = $this->objectManager->create($controllerClass);
     }

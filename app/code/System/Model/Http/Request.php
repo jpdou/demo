@@ -8,14 +8,60 @@
 
 namespace System\Model\Http;
 
+use System\Model\Config;
+
 class Request
 {
+    private $config;
+
     private $parameters;
 
+    private $controllerKey;
+
     public function __construct(
-        array $parameters=[]
+        Config $config
     ) {
-        $this->parameters = $parameters;
+        $this->config = $config;
+        $this->initialize();
+    }
+
+    private function initialize()
+    {
+        $parameters = [];
+
+        if (isset($_SERVER["REDIRECT_URL"])) {
+            $redirectUrl = ltrim($_SERVER["REDIRECT_URL"], '/');
+
+            $routers = $this->config->get('routers');
+
+            foreach ($routers as $key => $router) {
+                $matches = [];
+                $result = preg_match($router, $redirectUrl, $matches);
+                if ($result) {
+                    array_shift($matches);  // 丢掉第一个元素
+                    while(count($matches) > 0 && count($matches) % 2 == 0) {
+                        $parameters[array_shift($matches)] = array_shift($matches);
+                    }
+                    $this->controllerKey = $key;
+                    $this->parameters = $parameters;
+                    break;
+                }
+            }
+        } else {    // 首页
+            $this->controllerKey = 'Videos';
+        }
+
+        if ($this->controllerKey == null) {
+            $this->controllerKey = 'NotFound';
+        }
+    }
+
+    /**
+     * @return string
+     */
+    public function getControllerKey()
+    {
+        return $this->controllerKey;
     }
 
     public function get($key, $default=null)

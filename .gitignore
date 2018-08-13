@@ -1,2 +1,4 @@
 .idea/
 App/etc/config.php
+skin/style.css
+media/*

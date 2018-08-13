@@ -1,20 +1,31 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: jp.dou
- * Date: 2018/8/13
- * Time: 10:05
- */
 
 namespace Video\Controller\Video;
 
-
+use System\Model\Http\Request;
+use System\Model\Layout;
+use Video\Model\Video;
 use System\Controller\AbstractController;
 
-class ViewController extends AbstractController
+class VideoController extends AbstractController
 {
+    public function __construct(
+        Request $request,
+        Layout $layout
+    ) {
+        parent::__construct($request, $layout);
+        $this->template = 'video.phtml';
+    }
+
     public function execute()
     {
-        // TODO: Implement execute() method.
+        $videoId = $this->request->get('video');
+
+        /** @var Video $video */
+        $video = $this->objectManager->create(Video::class);
+
+        $video->load($videoId);
+
+        return $this->layout->renderTemplate($this->template, ['video' => $video]);
     }
 }

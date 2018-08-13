@@ -1,7 +1,7 @@
 <?php
-/** @var \App\Model\Layout $this */
+/** @var \System\Model\Layout $this */
 /** @var int $maxPage */
-$page = $this->getRequest()->get('p');
+$page = max((int) $this->getRequest()->get('p'), 1);
 $end = min($maxPage, max($page + 4, 9));
 $start = max(1, min($end - 8, $page - 3));
 

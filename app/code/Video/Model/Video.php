@@ -27,6 +27,11 @@ class Video extends AbstractModel
         $this->config = $config;
     }
 
+    public function getId()
+    {
+        return $this->getData('id');
+    }
+
     public function getTitle()
     {
         return $this->getData('title');
@@ -37,9 +42,9 @@ class Video extends AbstractModel
         return $this->getData('identifier');
     }
 
-    public function getHref()
+    public function getOriginHref()
     {
-        return $this->getData('href');
+        return $this->getData('origin_href');
     }
 
     public function getPoster()
@@ -55,5 +60,10 @@ class Video extends AbstractModel
     public function getDate()
     {
         return $this->getData('date');
+    }
+
+    public function getUrl()
+    {
+        return '/video/' . $this->getId();
     }
 }
