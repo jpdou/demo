@@ -54,7 +54,7 @@ class Video extends AbstractModel
 
     public function getPosterUrl()
     {
-        return $this->config->get('directories')['media']. $this->getPoster();
+        return $this->config->getConfig('directories')['media']. $this->getPoster();
     }
 
     public function getDate()

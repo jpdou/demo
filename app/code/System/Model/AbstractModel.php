@@ -17,10 +17,12 @@ abstract class AbstractModel
 
     private $data=[];
 
-    public function __construct()
-    {
-        $this->resource = Resource::getInstance();
-        $this->objectManager = ObjectManager::getInstance();
+    public function __construct(
+        ObjectManager $objectManager,
+        Resource $resource
+    ) {
+        $this->resource = $resource;
+        $this->objectManager = $objectManager;
     }
 
     public function load($value, $filed="id", $columns=null)

@@ -26,11 +26,12 @@ class Dispatcher
 
     function __construct(
         Config $config,
-        Request $request
+        Request $request,
+        ObjectManager $objectManager
     ) {
         $this->config = $config;
         $this->request = $request;
-        $this->objectManager = ObjectManager::getInstance();
+        $this->objectManager = $objectManager;
 
         $this->initialize();
     }

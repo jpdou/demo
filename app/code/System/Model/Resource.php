@@ -14,6 +14,8 @@ use Zend\Db\Sql\Sql;
 
 class Resource
 {
+    private $objectManager;
+
     private $adapter;
 
     private $select;
@@ -27,7 +29,9 @@ class Resource
         Select $select,
         Config $config
     ) {
-        $databaseConfig = $config->get('db');
+        $this->objectManager = $objectManager;
+
+        $databaseConfig = $config->getConfig('db');
         $this->adapter = new Adapter($databaseConfig);
 
         $this->sql = new Sql($this->adapter);

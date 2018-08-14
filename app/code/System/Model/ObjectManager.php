@@ -17,10 +17,8 @@ class ObjectManager
     private $injector;
 
     public function __construct(
-        Config $config
     ) {
         $this->injector = new Injector(new \Zend\Di\Config([
-            'preferences' => $config->get('preferences'),
         ]));;
 
         if (self::$instance == null) {
