@@ -7,7 +7,7 @@ use System\Model\Layout;
 use Video\Model\Video;
 use System\Controller\AbstractController;
 
-class VideoController extends AbstractController
+class ViewController extends AbstractController
 {
     public function __construct(
         Request $request,
