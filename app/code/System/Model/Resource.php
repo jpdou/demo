@@ -22,9 +22,7 @@ class Resource
 
     private $sql;
 
-    private static $instance;
-
-    private function __construct(
+    public function __construct(
         ObjectManager $objectManager,
         Select $select,
         Config $config
@@ -37,17 +35,6 @@ class Resource
         $this->sql = new Sql($this->adapter);
 
         $this->select = $select;
-    }
-
-    public static function getInstance()
-    {
-        if (self::$instance == null) {
-            $objectManager = ObjectManager::getInstance();
-            $select = $objectManager->get(Select::class);
-            $config = $objectManager->get(Config::class);
-            self::$instance = new Resource($objectManager, $select, $config);
-        }
-        return self::$instance;
     }
 
     /**

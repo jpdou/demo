@@ -15,7 +15,7 @@ abstract class AbstractModel
 
     protected $table;
 
-    private $data=[];
+    protected $data=[];
 
     public function __construct(
         ObjectManager $objectManager,

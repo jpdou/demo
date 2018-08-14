@@ -12,10 +12,11 @@ namespace System\Model;
 class Config
 {
     private $data;
+
     public function __construct(
         ObjectManager $objectManager
     ) {
-        $this->data = require __BASE_DIR__.DIRECTORY_SEPARATOR.'App'.DIRECTORY_SEPARATOR.'etc'.DIRECTORY_SEPARATOR.'config.php';
+        $this->data = include __BASE_DIR__.DS.'App'.DS.'etc'.DS.'config.php';
     }
 
     public function getConfig($key) {

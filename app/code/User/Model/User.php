@@ -11,9 +11,11 @@ namespace System\Model;
 
 class User extends AbstractModel
 {
-    public function __construct()
-    {
-        parent::__construct();
+    public function __construct(
+        ObjectManager $objectManager,
+        Resource $resource
+    ) {
+        parent::__construct($objectManager, $resource);
         $this->table = 'user';
     }
 }

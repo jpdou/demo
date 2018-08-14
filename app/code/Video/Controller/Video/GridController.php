@@ -13,11 +13,10 @@ class GridController extends AbstractController
     private $pageCount = 100;
 
     public function __construct(
-        Http $http,
         Request $request,
         Layout $layout
     ) {
-        parent::__construct($http, $request, $layout);
+        parent::__construct($request, $layout);
         $this->template = 'videos.phtml';
     }
 

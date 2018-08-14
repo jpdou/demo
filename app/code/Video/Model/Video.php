@@ -10,6 +10,8 @@ namespace Video\Model;
 
 use System\Model\AbstractModel;
 use System\Model\Config;
+use System\Model\ObjectManager;
+use System\Model\Resource;
 
 /**
  * Class Video
@@ -20,9 +22,11 @@ class Video extends AbstractModel
     private $config;
 
     public function __construct(
+        ObjectManager $objectManager,
+        Resource $resource,
         Config $config
     ) {
-        parent::__construct();
+        parent::__construct($objectManager, $resource);
         $this->table = "video";
         $this->config = $config;
     }
