@@ -16,7 +16,7 @@ class Config
     public function __construct(
         ObjectManager $objectManager
     ) {
-        $this->data = include __BASE_DIR__.DS.'App'.DS.'etc'.DS.'config.php';
+        $this->data = include __BASE_DIR__.DS.'app'.DS.'etc'.DS.'config.php';
     }
 
     public function getConfig($key) {

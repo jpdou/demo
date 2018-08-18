@@ -41,8 +41,8 @@ return [
         'header' => 'System/View/header.phtml',
         'footer' => 'System/View/footer.phtml',
         'pagination' => 'System/View/pagination.phtml',
-        'video_grid' => 'Video/view/videos.phtml',
-        'video_view' => 'Video/view/video.phtml',
+        'video_grid' => 'Video/View/videos.phtml',
+        'video_view' => 'Video/View/video.phtml',
         'login' => 'User/View/login.phtml'
     ],
 

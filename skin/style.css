@@ -1,0 +1,112 @@
+img {
+  width: 100%;
+}
+ul {
+  margin: 0;
+  padding: 0;
+}
+ul li {
+  list-style: none;
+}
+#header #nav li {
+  display: inline-block;
+}
+.pagination a {
+  display: inline-block;
+  min-width: 30px;
+  height: 30px;
+  border: solid 1px #ddd;
+  border-radius: 5px;
+  background-color: #eee;
+  text-align: center;
+  line-height: 30px;
+  text-decoration: none;
+  color: #000;
+}
+.pagination a.current {
+  background-color: #fff;
+}
+#mask {
+  display: none;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  opacity: 0.5;
+  background-color: #000;
+  z-index: 100;
+}
+#content .pagination {
+  text-align: right;
+  padding-right: 20px;
+}
+#content .list {
+  display: flex;
+  flex-wrap: wrap;
+}
+#content .list .item.video-item {
+  box-sizing: border-box;
+  width: 25%;
+  padding: 10px;
+}
+#content .list .item.video-item img {
+  width: 100%;
+}
+#content .video {
+  max-width: 1200px;
+  float: left;
+}
+#content .video h1 {
+  font-weight: 500;
+  font-size: 18px;
+}
+#content .video .detail .photo,
+#content .video .detail .info {
+  float: left;
+  margin-right: 10px;
+}
+#content .video .detail::after {
+  content: '';
+  display: block;
+  clear: both;
+}
+#content .video .samples {
+  display: flex;
+  flex-wrap: wrap;
+}
+#content .video .samples .item {
+  width: 200px;
+}
+#content .video #samples-viewer {
+  display: none;
+  width: 100%;
+  padding-top: 10%;
+  z-index: 1000;
+}
+#content .video #samples-viewer.active {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+#content .video #samples-viewer button {
+  width: 50px;
+  height: 50px;
+  border: none;
+  background: none;
+  font-size: 30px;
+  outline: none;
+  color: #fff;
+}
+#content .video #samples-viewer button:hover {
+  font-size: 40px;
+}
+#content .video #samples-viewer button.close {
+  position: absolute;
+  right: 0;
+  top: 0;
+}

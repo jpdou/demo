@@ -10,15 +10,15 @@ define('__BASE_DIR__',  __DIR__);
 define('DS', DIRECTORY_SEPARATOR);
 require "vendor/autoload.php";
 
-set_include_path(get_include_path(). PATH_SEPARATOR. __BASE_DIR__.DS."app".DS."code");
+set_include_path(get_include_path(). PATH_SEPARATOR. __BASE_DIR__.DS."app".DS."code" . PATH_SEPARATOR . __BASE_DIR__.DS."vendor");
 
 spl_autoload_register(function ($class) {
-    $path = $class. ".php";
+    $path = str_replace("\\", "/", $class) . ".php";
     include $path;
 });
 
 session_start();
-echo session_save_path();
+
 $objectManager = new System\Model\ObjectManager();
 /** @var System\Model\ObjectManager $objectManager */
 $objectManager = $objectManager->get(\System\Model\ObjectManager::class);
