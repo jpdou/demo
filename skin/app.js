@@ -6,36 +6,36 @@ var maskEl = $('#mask');
 
 /* ---------------------------------------- Video List ---------------------------------------- */
 var videoListEl = $(".list");
-$(document).ready(function () {
-    if (videoListEl.length > 0) {
-        var loading = false;
-        var load = function () {
-            var windowScrollTop = $(window).scrollTop();
-            var windowBottom = windowScrollTop + window.innerHeight;
-            var items = videoListEl.find(".item:not(.loaded)");
-            for(var i = 0; i < items.length; i++) {
-                var item = $(items[i]);
-                if (item.offset().top < windowBottom + 500) {
-                    var img = item.find('img');
-                    img.attr("src", img.data('src'));
-                } else {
-                    break;
-                }
-            }
-        };
-        load();
-        $(window).scroll(function () {
-            if (loading) {
-                return;
-            }
-            loading = true;
-            load();
-            setTimeout(function () {
-                loading = false;
-            }, 500);
-        })
-    }
-})
+// $(document).ready(function () {
+//     if (videoListEl.length > 0) {
+//         var loading = false;
+//         var load = function () {
+//             var windowScrollTop = $(window).scrollTop();
+//             var windowBottom = windowScrollTop + window.innerHeight;
+//             var items = videoListEl.find(".item:not(.loaded)");
+//             for(var i = 0; i < items.length; i++) {
+//                 var item = $(items[i]);
+//                 if (item.offset().top < windowBottom + 500) {
+//                     var img = item.find('img');
+//                     img.attr("src", img.data('src'));
+//                 } else {
+//                     break;
+//                 }
+//             }
+//         };
+//         load();
+//         $(window).scroll(function () {
+//             if (loading) {
+//                 return;
+//             }
+//             loading = true;
+//             load();
+//             setTimeout(function () {
+//                 loading = false;
+//             }, 500);
+//         })
+//     }
+// })
 
 
 /* ---------------------------------------- Video Detail Page ---------------------------------------- */

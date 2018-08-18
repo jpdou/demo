@@ -35,6 +35,7 @@ class GridController extends AbstractController
         }
 
         $select->offset($page * $this->pageCount);
+        $select->order('id DESC');
         $select->limit($this->pageCount);
         return $this->layout->renderTemplate($this->template, ['videos' => $videos, 'pageCount' => $this->pageCount]);
     }
