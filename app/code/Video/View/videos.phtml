@@ -1,12 +1,12 @@
 <?php
-/** @var App\Model\Layout $this */
-/** @var \App\Model\Collection $videos */
+/** @var System\Model\Layout $this */
+/** @var System\Model\Collection $videos */
 /** @var int $pageCount */
 ?>
-<?= $this->renderTemplate("header.phtml")  ?>
-<?= $this->renderTemplate('pagination.phtml', ['maxPage' => round($videos->count() / $pageCount)]) ?>
+<?= $this->renderTemplate("header")  ?>
+<?= $this->renderTemplate('pagination', ['maxPage' => round($videos->count() / $pageCount)]) ?>
 <div class="list">
-    <?php /** @var \App\Model\Video $video */ ?>
+    <?php /** @var \Video\Model\Video $video */ ?>
     <?php foreach ($videos as $video): ?>
         <div class="item video-item">
             <a href="<?= $video->getUrl() ?>">

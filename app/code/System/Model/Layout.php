@@ -13,11 +13,14 @@ use System\Model\Http\Request;
 
 class Layout
 {
+    private $config;
     private $request;
 
     public function __construct(
+        Config $config,
         Request $request
     ) {
+        $this->config =$config;
         $this->request = $request;
     }
 
@@ -26,16 +29,20 @@ class Layout
      * @param array $parameters
      * @return string
      */
-    public function renderTemplate($template, $parameters=[])
+    public function renderTemplate($name, $parameters=[])
     {
         $html = '';
-        if ($template) {
-            ob_start();
+        if ($name) {
             if (count($parameters)) {
                 extract($parameters, EXTR_SKIP);
             }
-            include __BASE_DIR__ . DIRECTORY_SEPARATOR . "App" . DIRECTORY_SEPARATOR . "View" . DIRECTORY_SEPARATOR . $template;
-            $html = ob_get_clean();
+            $templates = $this->config->getConfig('templates');
+            if (isset($templates[$name])) {
+                $template = $templates[$name];
+                ob_start();
+                include __BASE_DIR__ . DS . "app" . DS . "code" . DS. $template;
+                $html = ob_get_clean();
+            }
         }
         return $html;
     }

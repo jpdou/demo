@@ -17,7 +17,7 @@ class GridController extends AbstractController
         Layout $layout
     ) {
         parent::__construct($request, $layout);
-        $this->template = 'videos.phtml';
+        $this->template = 'video_grid';
     }
 
     public function execute()

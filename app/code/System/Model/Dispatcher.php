@@ -39,7 +39,7 @@ class Dispatcher
     private function initialize()
     {
         $key = $this->request->getControllerKey();
-        $controllerClass = "App".DIRECTORY_SEPARATOR."Controller".DIRECTORY_SEPARATOR.$key."Controller";
+        $controllerClass = $key."Controller";
 
         $this->controller = $this->objectManager->create($controllerClass);
     }

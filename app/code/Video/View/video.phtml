@@ -1,10 +1,9 @@
 <?php
-/** @var App\Model\Layout $this */
-/** @var \App\Model\Video $video */
+/** @var System\Model\Layout $this */
+/** @var Video\Model\Video $video */
 ?>
-<?= $this->renderTemplate("header.phtml")  ?>
+<?= $this->renderTemplate("header")  ?>
     <div class="video">
-        <?php /** @var \App\Model\Video $video */ ?>
         <h1><?= $video->getTitle() ?></h1>
         <div class="detail">
             <div class="photo">

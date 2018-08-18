@@ -29,26 +29,22 @@ class Request
     {
         $parameters = [];
 
-        if (isset($_SERVER["REDIRECT_URL"])) {
-            $redirectUrl = ltrim($_SERVER["REDIRECT_URL"], '/');
+        $url = isset($_SERVER["REDIRECT_URL"]) ? ltrim($_SERVER["REDIRECT_URL"], '/') : 'videos';
 
-            $routers = $this->config->get('routers');
+        $routers = $this->config->getConfig('routers');
 
-            foreach ($routers as $key => $router) {
-                $matches = [];
-                $result = preg_match($router, $redirectUrl, $matches);
-                if ($result) {
-                    array_shift($matches);  // 丢掉第一个元素
-                    while(count($matches) > 0 && count($matches) % 2 == 0) {
-                        $parameters[array_shift($matches)] = array_shift($matches);
-                    }
-                    $this->controllerKey = $key;
-                    $this->parameters = $parameters;
-                    break;
+        foreach ($routers as $key => $router) {
+            $matches = [];
+            $result = preg_match($router, $url, $matches);
+            if ($result) {
+                array_shift($matches);  // 丢掉第一个元素
+                while(count($matches) > 0 && count($matches) % 2 == 0) {
+                    $parameters[array_shift($matches)] = array_shift($matches);
                 }
+                $this->controllerKey = $key;
+                $this->parameters = $parameters;
+                break;
             }
-        } else {    // 首页
-            $this->controllerKey = 'Videos';
         }
 
         if ($this->controllerKey == null) {

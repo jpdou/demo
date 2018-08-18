@@ -28,8 +28,9 @@ class Collection implements \Iterator
     private $key=0;
 
     public function __construct(
+        Resource $resource
     ) {
-        $this->resource = Resource::getInstance();
+        $this->resource = $resource;
     }
 
     public function setEntity(AbstractModel $entity)

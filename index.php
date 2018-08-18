@@ -16,8 +16,9 @@ spl_autoload_register(function ($class) {
     $path = $class. ".php";
     include $path;
 });
-echo "<pre>";
+
 $objectManager = new System\Model\ObjectManager();
+/** @var System\Model\ObjectManager $objectManager */
 $objectManager = $objectManager->get(\System\Model\ObjectManager::class);
 
 /** @var \System\Model\Dispatcher $dispatcher */

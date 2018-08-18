@@ -14,7 +14,7 @@ class ViewController extends AbstractController
         Layout $layout
     ) {
         parent::__construct($request, $layout);
-        $this->template = 'video.phtml';
+        $this->template = 'video_view';
     }
 
     public function execute()
