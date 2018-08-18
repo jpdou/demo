@@ -31,6 +31,18 @@ class Video extends AbstractModel
         $this->config = $config;
     }
 
+    public function getSamples()
+    {
+        /** @var VideoSample $sample */
+        $sample = $this->objectManager->create(VideoSample::class);
+        $collection = $sample->getCollection();
+
+        $select = $collection->getSelect();
+        $select->where("video_id = " . $this->getId());
+
+        return $collection;
+    }
+
     public function getId()
     {
         return $this->getData('id');

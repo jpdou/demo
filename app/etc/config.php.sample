@@ -14,6 +14,38 @@ return [
     ],
 
     'preferences' => [
-        'App\Model\VideoInterface' => 'App\Model\Video',
+
+    ],
+
+    'routers' => [
+        'Video\Controller\Video\Grid' => '#^videos#',
+        'Video\Controller\Video\View' => '#^(video)\/([0-9]*)#',
+        'Actresses' => '#^actresses#',
+        'User/SubscribedActresses' => '#^(user)\/([0-9]*)\/subscribed_actresses#',
+        'User/SubscribedVideos' => '#^(user)\/([0-9]*)\/subscribed_videos#',
+        'User\Controller\Login' => '#^user\/login#',
+    ],
+
+    'auth_require' => [
+        'Video\Controller\Video\Grid' => true,
+        'Video\Controller\Video\View' => true,
+        'User\Controller\Login' => false,
+    ],
+
+    'directories' => [
+        'media' => '/media/'
+    ],
+
+    'templates' => [
+        '404' => 'System/View/404.phtml',
+        'header' => 'System/View/header.phtml',
+        'footer' => 'System/View/footer.phtml',
+        'pagination' => 'System/View/pagination.phtml',
+        'video_grid' => 'Video/view/videos.phtml',
+        'video_view' => 'Video/view/video.phtml',
+        'login' => 'User/View/login.phtml'
+    ],
+
+    'users' => [
     ]
 ];

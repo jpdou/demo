@@ -23,9 +23,9 @@ class Resource
     private $sql;
 
     public function __construct(
-        ObjectManager $objectManager,
+        \System\Model\ObjectManager $objectManager,
         Select $select,
-        Config $config
+        \System\Model\Config $config
     ) {
         $this->objectManager = $objectManager;
 

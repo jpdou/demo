@@ -28,7 +28,7 @@ class Collection implements \Iterator
     private $key=0;
 
     public function __construct(
-        Resource $resource
+        \System\Model\Resource $resource
     ) {
         $this->resource = $resource;
     }

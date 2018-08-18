@@ -11,6 +11,7 @@ namespace System\Model;
 
 use System\Controller\AbstractController;
 use System\Model\Http\Request;
+use User\Model\User;
 
 class Dispatcher
 {
@@ -18,6 +19,8 @@ class Dispatcher
     private $request;
 
     private $objectManager;
+
+    private $user;
 
     /**
      * @var AbstractController
@@ -27,11 +30,13 @@ class Dispatcher
     function __construct(
         Config $config,
         Request $request,
-        ObjectManager $objectManager
+        ObjectManager $objectManager,
+        User $user
     ) {
         $this->config = $config;
         $this->request = $request;
         $this->objectManager = $objectManager;
+        $this->user = $user;
 
         $this->initialize();
     }
@@ -39,6 +44,16 @@ class Dispatcher
     private function initialize()
     {
         $key = $this->request->getControllerKey();
+        $authRequire = $this->config->getConfig('auth_require');
+
+        // 检查授权， 授权检查设置默认为 需要
+        if (!isset($authRequire[$key]) || (isset($authRequire[$key]) && $authRequire[$key])) {
+            if ($this->user->auth() == false) {
+                header('Location: /user/login');
+                exit();
+            }
+        }
+
         $controllerClass = $key."Controller";
 
         $this->controller = $this->objectManager->create($controllerClass);

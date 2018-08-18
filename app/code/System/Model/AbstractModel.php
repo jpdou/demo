@@ -19,7 +19,7 @@ abstract class AbstractModel
 
     public function __construct(
         ObjectManager $objectManager,
-        Resource $resource
+        \System\Model\Resource $resource
     ) {
         $this->resource = $resource;
         $this->objectManager = $objectManager;

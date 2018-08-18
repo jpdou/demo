@@ -17,6 +17,8 @@ spl_autoload_register(function ($class) {
     include $path;
 });
 
+session_start();
+echo session_save_path();
 $objectManager = new System\Model\ObjectManager();
 /** @var System\Model\ObjectManager $objectManager */
 $objectManager = $objectManager->get(\System\Model\ObjectManager::class);

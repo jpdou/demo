@@ -48,7 +48,7 @@ class Request
         }
 
         if ($this->controllerKey == null) {
-            $this->controllerKey = 'NotFound';
+            $this->controllerKey = 'System\Controller\NotFound';
         }
     }
 
