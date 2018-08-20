@@ -36,12 +36,36 @@ class User extends AbstractModel
             if (isset($_POST['user']) && isset($_POST['password'])) {
                 $user = (string) $_POST['user'];
                 $password = (string) $_POST['password'];
-                $users = $this->config->getConfig('users');
-                $passwordMd5 = isset($users[$user]) ? $users[$user] : "";
-                $this->authed = strcmp(md5($password), $passwordMd5) == 0;
-                $_SESSION['authed'] = true;
+                $this->load($user, "name");
+
+                if ($this->getId() && $this->validate($password)) {
+                    $_SESSION['authed'] = true;
+                    $_SESSION['user_id'] = $this->getId();
+                }
             }
         }
         return $this->authed;
+    }
+
+
+    private function validate($password)
+    {
+        $passwordHash = $this->getPasswordHash();
+        return strcmp($passwordHash, md5($password)) == 0;
+    }
+
+    public function getId()
+    {
+        return $this->getData('id');
+    }
+
+    public function getName()
+    {
+        return $this->getData('name');
+    }
+
+    public function getPasswordHash()
+    {
+        return $this->getData('password_hash');
     }
 }
