@@ -1,0 +1,9 @@
+<?php
+/** @var \System\Model\Collection $videos */
+?>
+<?php /** @var Video\Model\Video $video */ ?>
+<?php foreach ($videos as $video) : ?>
+    <div>
+        <?= $video->getTitle() ?>
+    </div>
+<?php endforeach ?>
