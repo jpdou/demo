@@ -21,7 +21,7 @@ return [
         'Video\Controller\Video\Grid' => '#^videos#',
         'Video\Controller\Video\View' => '#^(video)\/([0-9]*)#',
         'Actresses' => '#^actresses#',
-        'User/SubscribedActresses' => '#^(user)\/([0-9]*)\/subscribed_actresses#',
+        'User\Controller\Subscribed\Actresses' => '#^user\/subscribed\/actresses#',
         'User/SubscribedVideos' => '#^(user)\/([0-9]*)\/subscribed_videos#',
         'User\Controller\Login' => '#^user\/login#',
     ],
