@@ -6,21 +6,21 @@
  * Time: 15:21
  */
 
-namespace User\Controller\Subscribed;
+namespace Video\Controller\Actress;
 
 use System\Controller\AbstractController;
 use System\Model\Http\Request;
 use System\Model\Layout;
 use Video\Model\Actress;
 
-class ActressesController extends AbstractController
+class ViewController extends AbstractController
 {
     public function __construct(
         Request $request,
         Layout $layout
     ) {
         parent::__construct($request, $layout);
-        $this->template = 'user_subscribed_actress';
+        $this->template = 'actress_view';
     }
 
 

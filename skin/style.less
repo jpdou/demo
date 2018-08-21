@@ -1,5 +1,10 @@
 img {
-  width: 100%;
+  width: 50px;
+  height: 50px;
+  &.loaded {
+    width: 100%;
+    height: inherit;
+  }
 }
 ul {
   margin: 0;
@@ -10,10 +15,34 @@ ul {
 }
 #header {
   #nav {
-
-
+    padding: 10px 0;
     li {
+      font-size: 16px;
+      margin: 0 10px;
+      padding: 5px 10px;
+      text-transform: uppercase;
       display: inline-block;
+
+      a, span {
+        cursor: pointer;
+        color: #777;
+      }
+      &:hover {
+        color: #fff;
+        border-radius: 15px;
+        background-color: dodgerblue;
+      }
+      > ul {
+        display: none;
+      }
+      &:hover > ul {
+        display: block;
+        position: absolute;
+        background-color: #eeeeee;
+        li {
+          margin: 10px 0;
+        }
+      }
     }
   }
 }
@@ -61,7 +90,6 @@ ul {
       width: 25%;
       padding: 10px;
       img {
-        width: 100%;
       }
     }
   }

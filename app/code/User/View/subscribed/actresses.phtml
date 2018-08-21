@@ -1,9 +1,9 @@
 <?php
-/** @var \System\Model\Collection $videos */
+/** @var \System\Model\Collection $actresses */
 ?>
-<?php /** @var Video\Model\Video $video */ ?>
-<?php foreach ($videos as $video) : ?>
+<?php /** @var Video\Model\Actress $actress */ ?>
+<?php foreach ($actresses as $actress) : ?>
     <div>
-        <?= $video->getTitle() ?>
+        <?= $actress->getName() ?>
     </div>
 <?php endforeach ?>

@@ -4,6 +4,10 @@
 
 var maskEl = $('#mask');
 
+$('img').on('load', function () {
+    $(this).addClass('loaded');
+});
+
 /* ---------------------------------------- Video List ---------------------------------------- */
 var videoListEl = $(".list");
 // $(document).ready(function () {

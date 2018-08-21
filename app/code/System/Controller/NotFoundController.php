@@ -13,6 +13,7 @@ class NotFoundController extends AbstractController
 {
     public function execute()
     {
+        header("HTTP/1.0 404 Not Found");
         return $this->layout->renderTemplate('404');
     }
 

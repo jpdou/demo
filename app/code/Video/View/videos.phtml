@@ -10,7 +10,7 @@
     <?php foreach ($videos as $video): ?>
         <div class="item video-item">
             <a href="<?= $video->getUrl() ?>" target="_blank">
-                <img src="<?= $video->getPosterUrl() ?>" />
+                <img class="loading" src="<?= $video->getPosterUrl() ?>" />
             </a>
             <p class="date"><?= substr($video->getDate(), 0, 10) ?></p>
             <p class="title"><?= $video->getTitle() ?></p>
