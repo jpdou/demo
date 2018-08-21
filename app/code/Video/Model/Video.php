@@ -26,7 +26,7 @@ class Video extends AbstractModel
         Resource $resource,
         Config $config
     ) {
-        parent::__construct($objectManager, $resource);
+        parent::__construct($objectManager);
         $this->table = "video";
         $this->config = $config;
     }

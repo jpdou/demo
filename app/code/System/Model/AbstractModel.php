@@ -18,11 +18,12 @@ abstract class AbstractModel
     protected $data=[];
 
     public function __construct(
-        ObjectManager $objectManager,
-        \System\Model\Resource $resource
+        ObjectManager $objectManager
     ) {
-        $this->resource = $resource;
         $this->objectManager = $objectManager;
+        /** @var \System\Model\Resource $resource */
+        $resource = $this->objectManager->get(Resource::class);
+        $this->resource = $resource;
     }
 
     public function load($value, $filed="id", $columns=null)

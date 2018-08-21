@@ -23,7 +23,7 @@ class User extends AbstractModel
         Config $config,
         Resource $resource
     ) {
-        parent::__construct($objectManager, $resource);
+        parent::__construct($objectManager);
         $this->table = 'user';
         $this->config = $config;
 

@@ -9,11 +9,15 @@
 namespace Video\Model;
 
 
-class Actress
+use System\Model\AbstractModel;
+use System\Model\ObjectManager;
+
+class Actress extends AbstractModel
 {
     public function __construct(
-
+        ObjectManager $objectManager,
+        Resource $resource
     ) {
-
+        parent::__construct($objectManager);
     }
 }

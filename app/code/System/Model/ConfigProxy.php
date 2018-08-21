@@ -20,7 +20,7 @@ class ConfigProxy extends AbstractModel
         Resource $resource,
         Config $config
     ) {
-        parent::__construct($objectManager, $resource);
+        parent::__construct($objectManager);
 
         $this->config = $config;
         $this->table = 'config';

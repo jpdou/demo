@@ -23,7 +23,7 @@ class VideoSample extends AbstractModel
         Resource $resource,
         Config $config
     ) {
-        parent::__construct($objectManager, $resource);
+        parent::__construct($objectManager);
         $this->table = "video_sample";
         $this->config = $config;
     }
