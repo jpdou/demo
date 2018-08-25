@@ -51,4 +51,28 @@ class Layout
     {
         return $this->request;
     }
+
+    public function getUrl($url, $query=null)
+    {
+        $pos = strpos($url, '?');
+        $queryStrings = [];
+
+        $_url = $url;
+        // 处理 url
+        if ($pos !== false) {
+            $_url = substr($url, 0, $pos);
+        }
+
+        if (is_array($query)) {
+            $query = array_merge($_GET, $query);
+        }
+
+        if (count($query)) {
+            foreach ($query as $key => $value) {
+                $queryStrings[] = $key . '=' . $value;
+            }
+        }
+
+        return $_url . '?' . implode('&', $queryStrings);
+    }
 }

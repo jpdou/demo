@@ -41,15 +41,11 @@ class GridController extends AbstractController
             []
         )->where(['favorite.user_id' => $_SESSION['user_id']]);
 
-        $page = $this->request->get('p', 1);
-        $page--;
-
-        if ($page < 0) {
-            $page = 0;
-        }
+        $page = (int) $this->request->get('p', 1);
+        $page = ($page - 1) < 0 ? 0 : $page - 1;
 
         $select->offset($page * $this->pageCount);
-        $select->order('id DESC');
+        $select->order('date DESC');
         $select->limit($this->pageCount);
 
         $videos->load();

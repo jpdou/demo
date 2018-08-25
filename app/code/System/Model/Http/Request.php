@@ -76,4 +76,10 @@ class Request
 
         return $default;
     }
+
+    public function getCurrentUrl()
+    {
+        $url = $_SERVER['REQUEST_URI'];
+        return $url;
+    }
 }

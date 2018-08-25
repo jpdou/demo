@@ -4,7 +4,13 @@
 /** @var int $pageCount */
 ?>
 <?= $this->renderTemplate("header")  ?>
-<?= $this->renderTemplate('pagination', ['maxPage' => round($videos->count() / $pageCount)]) ?>
+<div class="toolbar">
+    <div class="filter">
+        <a href="?filter=today_released">Today Released</a>
+    </div>
+    <?php $pagination = $this->renderTemplate('pagination', ['maxPage' => round($videos->count() / $pageCount)]) ?>
+    <?= $pagination ?>
+</div>
 <div class="list">
     <?php /** @var \Video\Model\Video $video */ ?>
     <?php foreach ($videos as $video): ?>
@@ -17,5 +23,5 @@
         </div>
     <?php endforeach ?>
 </div>
-<?= $this->renderTemplate('pagination', ['maxPage' => round($videos->count() / $pageCount)]) ?>
+<?= $pagination ?>
 <?= $this->renderTemplate("footer") ?>

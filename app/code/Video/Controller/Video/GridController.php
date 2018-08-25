@@ -26,16 +26,26 @@ class GridController extends AbstractController
         $videos = $video->getCollection();
         $select = $videos->getSelect();
 
-        $page = $this->request->get('p', 1);
-        $page--;
+        $countSelect = $videos->getCountSelect();
 
-        if ($page < 0) {
-            $page = 0;
+        // filter
+        $filter = $this->request->get('filter', '');
+        switch ($filter) {
+            case 'today_released' :
+                $select->where(['date' => date("Y-m-d 00:00:00")]);
+                $countSelect->where(['date' => date("Y-m-d 00:00:00")]);
+                break;
+            default:
+                break;
         }
 
+        $page = (int) $this->request->get('p', 1);
+        $page = ($page - 1) < 0 ? 0 : $page - 1;
+
         $select->offset($page * $this->pageCount);
-        $select->order('id DESC');
+        $select->order('date DESC');
         $select->limit($this->pageCount);
+
         return $this->layout->renderTemplate($this->template, ['videos' => $videos, 'pageCount' => $this->pageCount]);
     }
 }
