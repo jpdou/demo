@@ -12,7 +12,7 @@ use Zend\Db\Adapter\Adapter;
 use Zend\Db\Sql\Select;
 use Zend\Db\Sql\Sql;
 
-class Resource
+class Db
 {
     private $objectManager;
 
@@ -48,6 +48,32 @@ class Resource
     public function getSelect()
     {
         return clone $this->select;
+    }
+
+    public function insert($table, $columns, $values)
+    {
+        $insert = $this->sql->insert($table);
+        $insert->columns($columns);
+        $insert->values($values);
+        $stmt = $this->sql->prepareStatementForSqlObject($insert);
+        $stmt->execute();
+    }
+
+    public function update($table, $set, $where)
+    {
+        $update = $this->sql->update($table);
+        $update->set($set);
+        $update->where($where);
+        $stmt = $this->sql->prepareStatementForSqlObject($update);
+        $stmt->execute();
+    }
+
+    public function delete($table, $where)
+    {
+        $delete = $this->sql->delete($table);
+        $delete->where($where);
+        $stmt = $this->sql->prepareStatementForSqlObject($delete);
+        $stmt->execute();
     }
 
     /**

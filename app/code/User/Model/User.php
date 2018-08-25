@@ -11,7 +11,7 @@ namespace User\Model;
 use System\Model\AbstractModel;
 use System\Model\Config;
 use System\Model\ObjectManager;
-use System\Model\Resource;
+use System\Model\Db;
 
 class User extends AbstractModel
 {
@@ -21,7 +21,7 @@ class User extends AbstractModel
     public function __construct(
         ObjectManager $objectManager,
         Config $config,
-        Resource $resource
+        Db $db
     ) {
         parent::__construct($objectManager);
         $this->table = 'user';

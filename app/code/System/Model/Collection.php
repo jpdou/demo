@@ -10,40 +10,48 @@ namespace System\Model;
 
 
 use Zend\Db\Sql\Select;
+use Zend\Db\Adapter\Platform\Mysql;
+use Zend\Db\Sql\Expression;
 
-class Collection implements \Iterator
+class Collection implements \Iterator, \Countable
 {
-    private $resource;
+    private $db;
 
     /**
      * @var AbstractModel
      */
     private $entity;
 
+    private $platform;
+
     /** @var  Select */
     private $select;
+
+    private $countSelect;
 
     private $loaded=false;
     private $entities=[];
     private $key=0;
 
     public function __construct(
-        \System\Model\Resource $resource
+        \System\Model\db $db,
+        Mysql $mysqlPlatform
     ) {
-        $this->resource = $resource;
+        $this->db = $db;
+        $this->platform = $mysqlPlatform;
     }
 
     public function setEntity(AbstractModel $entity)
     {
         $this->entity = $entity;
-        $this->select = $this->resource->getSelect();
+        $this->select = $this->db->getSelect();
         $this->select->from(['e' => $this->entity->getTable()]);
     }
 
     public function load()
     {
         if (!$this->loaded) {
-            $stmt = $this->resource->prepare($this->select);
+            $stmt = $this->db->prepare($this->select);
 
             $results = $stmt->execute();
 
@@ -93,29 +101,26 @@ class Collection implements \Iterator
 
     public function getCountSelect()
     {
-        $select = $this->resource->getSelect();
-        $select->from($this->entity->getTable());
-        $select->columns(['count' => 'count(*)'], false);
-        return $select;
+        if ($this->countSelect == null) {
+            $this->countSelect = $this->db->getSelect();
+            $this->countSelect->from($this->entity->getTable());
+            $this->countSelect->columns(['count' => new Expression('COUNT(*)')], false);
+        }
+        return $this->countSelect;
     }
 
     public function count()
     {
-        $select = $this->getCountSelect();
-        $sql = $select->getSqlString();
-
-        $search = ['"count""("*")" AS "count"', '"'];
-        $replace = ['count(*)', ''];
-
-        $sql = str_replace($search, $replace, $sql);
-        /** @var \Zend\Db\Adapter\Driver\Pdo\Statement $stmt */
-        $stmt = $this->resource->getAdapter()->query($sql);
-        $results = $stmt->execute();
-        $results->next();
-        $row = $results->current();
-        if (isset($row['count(*)'])) {
-            return (int) $row['count(*)'];
+        if ($this->loaded) {
+            return count($this->entities);
+        } else {
+            $select = $this->getCountSelect();
+            /** @var \Zend\Db\Adapter\Driver\Pdo\Statement $stmt */
+            $stmt = $this->db->prepare($select);
+            $results = $stmt->execute();
+            $results->next();
+            $row = $results->current();
+            return isset($row['count']) ? (int) $row['count'] : 0;
         }
-        return 0;
     }
 }

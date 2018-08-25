@@ -10,10 +10,12 @@ namespace System\Model;
 
 abstract class AbstractModel
 {
-    protected $resource;
+    protected $db;
     protected $objectManager;
 
     protected $table;
+
+    protected $primaryField = 'id';
 
     protected $data=[];
 
@@ -21,14 +23,18 @@ abstract class AbstractModel
         ObjectManager $objectManager
     ) {
         $this->objectManager = $objectManager;
-        /** @var \System\Model\Resource $resource */
-        $resource = $this->objectManager->get(Resource::class);
-        $this->resource = $resource;
+        /** @var Db $db */
+        $db = $this->objectManager->get(Db::class);
+        $this->db = $db;
     }
 
-    public function load($value, $filed="id", $columns=null)
+    public function load($value, $filed=null, $columns=null)
     {
-        $select = $this->resource->getSelect();
+        if ($filed == null) {
+            $filed = $this->primaryField;
+        }
+
+        $select = $this->db->getSelect();
         $select->from(['e' => $this->table])
             ->where([$filed => $value])
             ->limit(1);
@@ -36,7 +42,7 @@ abstract class AbstractModel
             $select->columns($columns);
         }
 
-        $stmt = $this->resource->prepare($select);
+        $stmt = $this->db->prepare($select);
 
         $results = $stmt->execute();
 
@@ -65,6 +71,11 @@ abstract class AbstractModel
         return null;
     }
 
+    public function getId()
+    {
+        return $this->getData($this->primaryField);
+    }
+
     public function getTable()
     {
         return $this->table;
@@ -72,12 +83,34 @@ abstract class AbstractModel
 
     /**
      * @return Collection
+     * @throws \Exception
      */
     public function getCollection()
     {
+        if (!$this->getTable()) {
+            throw new \Exception('Base table have not define!');
+        }
         /** @var Collection $collection */
         $collection = $this->objectManager->create(Collection::class);
         $collection->setEntity($this);
         return $collection;
+    }
+
+    public function save()
+    {
+        $data = $this->getData();
+        if ($this->getId()) {   // update
+            unset($data[$this->primaryField]);
+            $this->db->update($this->table, $data, [$this->primaryField => $this->getId()]);
+        } else {    // insert
+            $columns = array_keys($data);
+            $values = array_values($data);
+            $this->db->insert($this->table, $columns, $values);
+        }
+    }
+
+    public function delete()
+    {
+        $this->db->delete($this->table, [$this->primaryField => $this->getId()]);
     }
 }

@@ -9,15 +9,17 @@
 namespace Video\Model;
 
 use System\Model\AbstractModel;
+use System\Model\Db;
 use System\Model\ObjectManager;
 
 class Actress extends AbstractModel
 {
     public function __construct(
         ObjectManager $objectManager,
-        Resource $resource
+        Db $db
     ) {
         parent::__construct($objectManager);
+        $this->table = 'actress';
     }
 
     /**

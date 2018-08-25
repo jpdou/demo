@@ -12,7 +12,7 @@ namespace Video\Model;
 use System\Model\AbstractModel;
 use System\Model\Config;
 use System\Model\ObjectManager;
-use System\Model\Resource;
+use System\Model\Db;
 
 class VideoSample extends AbstractModel
 {
@@ -20,7 +20,7 @@ class VideoSample extends AbstractModel
 
     public function __construct(
         ObjectManager $objectManager,
-        Resource $resource,
+        Db $db,
         Config $config
     ) {
         parent::__construct($objectManager);

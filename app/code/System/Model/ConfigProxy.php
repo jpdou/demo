@@ -17,7 +17,7 @@ class ConfigProxy extends AbstractModel
 
     public function __construct(
         ObjectManager $objectManager,
-        Resource $resource,
+        Db $db,
         Config $config
     ) {
         parent::__construct($objectManager);
