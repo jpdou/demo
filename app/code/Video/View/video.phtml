@@ -1,9 +1,15 @@
 <?php
 /** @var System\Model\Layout $this */
 /** @var Video\Model\Video $video */
+/** @var bool $isFavoriteVideo */
 ?>
 <?= $this->renderTemplate("header")  ?>
     <div class="video">
+        <script>
+            window.video = {
+                id : <?= $video->getId() ?>
+            }
+        </script>
         <h1><?= $video->getTitle() ?></h1>
         <div class="detail">
             <div class="photo">
@@ -17,6 +23,10 @@
                 <div>
                     <label>发行时间: </label>
                     <span><?= substr($video->getDate(), 0, 10) ?></span>
+                </div>
+                <div class="actions">
+                    <a class="like<?php if($isFavoriteVideo) : ?> active<?php endif ?>"><i class="fa fa-heart"></i></a>
+                    <a class="download" target="_blank" href="https://btso.pw/search/<?= $video->getIdentifier() ?>">Download</a>
                 </div>
             </div>
         </div>
@@ -37,9 +47,11 @@
         </ul>
         <div id="samples-viewer">
             <button class="nav prev"><i class="fa fa-chevron-left"></i></button>
-            <ul>
+            <div class="img-wrap">
+                <ul>
 
-            </ul>
+                </ul>
+            </div>
             <button class="nav next"><i class="fa fa-chevron-right"></i></button>
             <button class="close"><i class="fa fa-close "></i></button>
         </div>

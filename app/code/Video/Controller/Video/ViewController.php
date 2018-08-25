@@ -6,6 +6,7 @@ use System\Model\Http\Request;
 use System\Model\Layout;
 use Video\Model\Video;
 use System\Controller\AbstractController;
+use User\Model\Favorite\Video as FavoriteVideo;
 
 class ViewController extends AbstractController
 {
@@ -23,9 +24,21 @@ class ViewController extends AbstractController
 
         /** @var Video $video */
         $video = $this->objectManager->create(Video::class);
-
         $video->load($videoId);
 
-        return $this->layout->renderTemplate($this->template, ['video' => $video]);
+        /** @var FavoriteVideo $favoriteVideo */
+        $favoriteVideo = $this->objectManager->get(FavoriteVideo::class);
+        $favoriteVideos = $favoriteVideo->getCollection();
+        $select = $favoriteVideos->getCountSelect();
+        $select->where(['user_id' => $_SESSION['user_id']])
+            ->where(['video_id' => $video->getId()]);
+        $isFavoriteVideo = $favoriteVideos->count() > 0;
+
+        return $this->layout->renderTemplate($this->template,
+            [
+                'video' => $video,
+                'isFavoriteVideo' => $isFavoriteVideo
+            ]
+        );
     }
 }

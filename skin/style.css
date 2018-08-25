@@ -1,8 +1,4 @@
 img {
-  width: 50px;
-  height: 50px;
-}
-img.loaded {
   width: 100%;
   height: inherit;
 }
@@ -96,6 +92,22 @@ ul li {
   float: left;
   margin-right: 10px;
 }
+#content .video .detail .photo > div,
+#content .video .detail .info > div {
+  margin-bottom: 10px;
+}
+#content .video .detail .photo .actions a,
+#content .video .detail .info .actions a {
+  display: block;
+}
+#content .video .detail .photo .actions .like,
+#content .video .detail .info .actions .like {
+  cursor: pointer;
+}
+#content .video .detail .photo .actions .like.active,
+#content .video .detail .info .actions .like.active {
+  color: red;
+}
 #content .video .detail::after {
   content: '';
   display: block;
@@ -106,12 +118,20 @@ ul li {
   flex-wrap: wrap;
 }
 #content .video .samples .item {
-  width: 200px;
+  padding: 5px;
+  width: 240px;
+  max-height: 160px;
+}
+#content .video .samples .item img {
+  width: initial;
+  max-width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  display: block;
 }
 #content .video #samples-viewer {
   display: none;
   width: 100%;
-  padding-top: 10%;
   z-index: 1000;
 }
 #content .video #samples-viewer.active {
@@ -122,6 +142,17 @@ ul li {
   position: fixed;
   top: 0;
   left: 0;
+}
+#content .video #samples-viewer .img-wrap {
+  width: 90vw;
+  height: 100vh;
+}
+#content .video #samples-viewer .img-wrap img {
+  max-height: 100%;
+  width: initial;
+  height: 100%;
+  margin: 0 auto;
+  display: block;
 }
 #content .video #samples-viewer button {
   width: 50px;

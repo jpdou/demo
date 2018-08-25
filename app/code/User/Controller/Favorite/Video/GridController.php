@@ -1,11 +1,18 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: jp.dou
+ * Date: 2018/8/25
+ * Time: 14:55
+ */
 
-namespace Video\Controller\Video;
+namespace User\Controller\Favorite\Video;
 
+
+use System\Controller\AbstractController;
 use System\Model\Http\Request;
 use System\Model\Layout;
 use Video\Model\Video;
-use System\Controller\AbstractController;
 
 class GridController extends AbstractController
 {
@@ -26,6 +33,14 @@ class GridController extends AbstractController
         $videos = $video->getCollection();
         $select = $videos->getSelect();
 
+        /** @var \User\Model\Favorite\Video $favoriteVideo */
+        $favoriteVideo = $this->objectManager->get(\User\Model\Favorite\Video::class);
+        $select->join(
+            ['favorite' => $favoriteVideo->getTable()],
+            'e.id = favorite.video_id',
+            []
+        )->where(['favorite.user_id' => $_SESSION['user_id']]);
+
         $page = $this->request->get('p', 1);
         $page--;
 
@@ -36,6 +51,9 @@ class GridController extends AbstractController
         $select->offset($page * $this->pageCount);
         $select->order('id DESC');
         $select->limit($this->pageCount);
+
+        $videos->load();
+
         return $this->layout->renderTemplate($this->template, ['videos' => $videos, 'pageCount' => $this->pageCount]);
     }
 }

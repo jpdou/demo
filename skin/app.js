@@ -70,7 +70,14 @@ sampleViewer.find('button.nav').click(function () {
     var ul = sampleViewer.find("ul");
     var max = samplesContainerEl.find("li").children().length - 1;
     var current = $(this).hasClass('prev') ? ul.data("current") - 1 : ul.data("current") + 1;
-    current = Math.min(Math.max(0, current), max);
+
+    //current = Math.min(Math.max(0, current), max);
+    if (current > max) {
+        current = current - max - 1;
+    } else if (current < 0){
+        current += (max + 1);
+    }
+
     sample = samplesContainerEl.find('.item-' + current);
     var clone = sample.clone();
     clone[0].onclick = closeSampleViewer;
@@ -79,3 +86,16 @@ sampleViewer.find('button.nav').click(function () {
 });
 
 sampleViewer.find(".close").click(closeSampleViewer);
+
+// like
+var likeButton = videoEl.find('.actions .like');
+likeButton.click(function (e) {
+    var data = {'video_id' : window.video.id, 'cancel': $(this).hasClass('active') ? 1 : 0};
+    $.post(
+        '/user/favorite/video/post',
+        data,
+        function(data,status,xhr) {
+            likeButton.toggleClass('active');
+        }
+    )
+});
