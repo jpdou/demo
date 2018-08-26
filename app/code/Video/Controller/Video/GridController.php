@@ -29,14 +29,25 @@ class GridController extends AbstractController
         $countSelect = $videos->getCountSelect();
 
         // filter
-        $filter = $this->request->get('filter', '');
-        switch ($filter) {
-            case 'today_released' :
-                $select->where(['date' => date("Y-m-d 00:00:00")]);
-                $countSelect->where(['date' => date("Y-m-d 00:00:00")]);
-                break;
-            default:
-                break;
+        $filters = (array) $this->request->get('filter', []);
+        if (count($filters)) {
+            foreach ($filters as $filter => $value) {
+                if (!$value) {
+                    continue;
+                }
+                switch ($filter) {
+                    case 'release_date' :
+                        $select->where(['date' => date("Y-m-d 00:00:00")]);
+                        $countSelect->where(['date' => date("Y-m-d 00:00:00")]);
+                        break;
+                    case 'identifier':
+                        $select->where(['identifier' => $value]);
+                        $countSelect->where(['identifier' => $value]);
+                        break;
+                    default:
+                        break;
+                }
+            }
         }
 
         $page = (int) $this->request->get('p', 1);
@@ -46,6 +57,12 @@ class GridController extends AbstractController
         $select->order('date DESC');
         $select->limit($this->pageCount);
 
-        return $this->layout->renderTemplate($this->template, ['videos' => $videos, 'pageCount' => $this->pageCount]);
+        return $this->layout->renderTemplate($this->template,
+            [
+                'videos' => $videos,
+                'filters' => $filters,
+                'pageCount' => $this->pageCount
+            ]
+        );
     }
 }

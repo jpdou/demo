@@ -63,11 +63,11 @@ class Request
     public function get($key, $default=null)
     {
         if (isset($_POST[$key])) {
-            return (string) $_POST[$key];
+            return $_POST[$key];
         }
 
         if (isset($_GET[$key])) {
-            return (string) $_GET[$key];
+            return $_GET[$key];
         }
 
         if (isset($this->parameters[$key])) {

@@ -12,6 +12,7 @@ use System\Model\AbstractModel;
 use System\Model\Config;
 use System\Model\ObjectManager;
 use System\Model\Db;
+use Zend\Db\Adapter\Platform\Mysql;
 
 /**
  * Class Video
@@ -43,6 +44,26 @@ class Video extends AbstractModel
         return $collection;
     }
 
+    public function getActresses()
+    {
+        /** @var Actress $actress */
+        $actress = $this->objectManager->get(Actress::class);
+        $collection = $actress->getCollection();
+        $select = $collection->getSelect();
+
+        /** @var ActressVideo $actressVideo */
+        $actressVideo = $this->objectManager->get(ActressVideo::class);
+        $select->join(
+            ['av' => $actressVideo->getTable()],
+            'e.id = av.actress_id',
+            []
+        )->where(['av.video_id' => $this->getId()]);
+
+        $collection->load();
+
+        return $collection;
+    }
+
     public function getId()
     {
         return $this->getData('id');
@@ -58,9 +79,27 @@ class Video extends AbstractModel
         return $this->getData('identifier');
     }
 
+    /**
+     * @param $identifier
+     * @return Video
+     */
+    public function setIdentifier($identifier)
+    {
+        return $this->setData('identifier', $identifier);
+    }
+
     public function getOriginHref()
     {
         return $this->getData('origin_href');
+    }
+
+    /**
+     * @param $href
+     * @return Video
+     */
+    public function setOriginHref($href)
+    {
+        return $this->setData('origin_href', $href);
     }
 
     public function getPoster()
@@ -70,7 +109,7 @@ class Video extends AbstractModel
 
     public function getPosterUrl()
     {
-        $poster = $this->getPoster() ? : 'video/poster/default.jpg';
+        $poster = $this->getPoster() ? : '404.jpg';
         return $this->config->getConfig('directories')['media']. $poster;
     }
 

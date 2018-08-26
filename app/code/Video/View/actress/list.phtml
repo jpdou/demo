@@ -1,0 +1,15 @@
+<?php
+/** @var System\Model\Layout $this */
+/** @var System\Model\Collection $actresses */
+?>
+<div class="list">
+    <?php /** @var \Video\Model\Actress $actress */ ?>
+    <?php foreach ($actresses as $actress): ?>
+        <div class="item actress-item">
+            <a href="<?= $actress->getUrl() ?>">
+                <img class="loading" src="<?= $actress->getAvatarUrl() ?>" />
+            </a>
+            <p class="name"><?= $actress->getName() ?></p>
+        </div>
+    <?php endforeach ?>
+</div>

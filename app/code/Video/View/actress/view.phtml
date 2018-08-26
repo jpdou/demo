@@ -1,0 +1,21 @@
+<?php
+/** @var System\Model\Layout $this */
+/** @var \Video\Model\Actress $actress */
+/** @var bool $isFavoriteActress */
+?>
+<?= $this->renderTemplate("header")  ?>
+<div class="actress-view">
+    <script>
+        window.actress_id = <?= $actress->getId() ?>;
+    </script>
+    <div class="avatar">
+        <img src="<?= $actress->getAvatarUrl() ?>"/>
+        <p><?= $actress->getName() ?></p>
+        <p><?= $actress->getVideoCount() ?> videos</p>
+        <div class="actions">
+            <a class="like<?php if ($isFavoriteActress) : ?> active<?php endif ?>"><i class="fa fa-heart"></i></a>
+        </div>
+    </div>
+    <?= $this->renderTemplate('video_list', ['videos' => $actress->getVideos()]) ?>
+</div>
+<?= $this->renderTemplate("footer") ?>

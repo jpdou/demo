@@ -26,25 +26,25 @@ class ViewController extends AbstractController
 
     public function execute()
     {
-        $userId = isset($_SESSION['user_id']) ? (int) $_SESSION['user_id'] : 0;
-        $collection = [];
-        if ($userId) {
-            /** @var Actress $actress */
-            $actress = $this->objectManager->create(Actress::class);
+        $actressId=  $this->request->get('actress', 0);
 
-            $collection = $actress->getCollection();
+        /** @var Actress $actress */
+        $actress = $this->objectManager->create(Actress::class);
+        $actress->load($actressId);
 
-            $collection->getSelect()
-                ->join(
-                ['subscribed' => 'user_subscribed_actress'],
-                'e.id = subscribed.actress_id',
-                []
-            )->where('subscribed.user_id = '. $userId);
+        /** @var \User\Model\Favorite\Actress $favoriteActress */
+        $favoriteActress = $this->objectManager->get(\User\Model\Favorite\Actress::class);
+        $collection = $favoriteActress->getCollection();
+        $select = $collection->getCountSelect();
+        $select->where(['user_id' => $_SESSION['user_id'], 'actress_id' => $actressId]);
+        $isFavoriteActress = $collection->count() > 0;
 
-            $collection->load();
-        }
-
-        return $this->layout->renderTemplate($this->template, ['actresses' => $collection]);
+        return $this->layout->renderTemplate($this->template,
+            [
+                'actress' => $actress,
+                'isFavoriteActress' => $isFavoriteActress,
+            ]
+        );
     }
 
 }

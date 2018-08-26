@@ -92,6 +92,7 @@ ul {
     }
   }
 
+  // 列表页
   .list {
     display: flex;
     flex-wrap: wrap;
@@ -102,8 +103,14 @@ ul {
       img {
       }
     }
+    .item.actress-item {
+      box-sizing: border-box;
+      width: 15%;
+      padding: 10px;
+    }
   }
 
+  // video view 页
   .video {
     max-width: 1200px;
     float: left;
@@ -135,6 +142,13 @@ ul {
         content: '';
         display: block;
         clear: both;
+      }
+    }
+
+    .actresses {
+      display: flex;
+      .actress {
+        width: 15%;
       }
     }
 
@@ -193,6 +207,21 @@ ul {
           position: absolute;
           right: 0;
           top: 0;
+        }
+      }
+    }
+  }
+
+  .actress-view {
+    .avatar {
+      width: 200px;
+      float: left;
+      .actions {
+        .like {
+          display: block;
+          &.active {
+            color: red;
+          }
         }
       }
     }

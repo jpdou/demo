@@ -92,6 +92,11 @@ ul li {
   width: 25%;
   padding: 10px;
 }
+#content .list .item.actress-item {
+  box-sizing: border-box;
+  width: 15%;
+  padding: 10px;
+}
 #content .video {
   max-width: 1200px;
   float: left;
@@ -125,6 +130,12 @@ ul li {
   content: '';
   display: block;
   clear: both;
+}
+#content .video .actresses {
+  display: flex;
+}
+#content .video .actresses .actress {
+  width: 15%;
 }
 #content .video .samples {
   display: flex;
@@ -183,4 +194,14 @@ ul li {
   position: absolute;
   right: 0;
   top: 0;
+}
+#content .actress-view .avatar {
+  width: 200px;
+  float: left;
+}
+#content .actress-view .avatar .actions .like {
+  display: block;
+}
+#content .actress-view .avatar .actions .like.active {
+  color: red;
 }

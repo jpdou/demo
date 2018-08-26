@@ -1,0 +1,28 @@
+<?php
+/** @var System\Model\Layout $this */
+/** @var System\Model\Collection $videos */
+/** @var array $filters */
+/** @var int $pageCount */
+?>
+<?= $this->renderTemplate("header")  ?>
+<div class="toolbar">
+    <div class="actions">
+        <form class="new-video" action="/video/new">
+            <label>Origin Href: <input type="text" name="origin_href"></label>
+            <label>Identifier: <input type="text" name="identifier"></label>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    <div class="filter">
+        <form action="/videos" method="post">
+            <label>Release Date: <input type="text" name="filter[release_date]" value="<?= isset($filters['release_date']) ? $filters['release_date'] : date('Y-m-d') ?>"></label>
+            <label>Identifier: <input type="text" name="filter[identifier]" value="<?= isset($filters['identifier']) ? $filters['identifier'] : '' ?>"></label>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    <?php $pagination = $this->renderTemplate('pagination', ['maxPage' => round($videos->count() / $pageCount)]) ?>
+    <?= $pagination ?>
+</div>
+<?= $this->renderTemplate('video_list', ['videos' => $videos]) ?>
+<?= $pagination ?>
+<?= $this->renderTemplate("footer") ?>

@@ -1,21 +1,12 @@
 <?php
 /** @var System\Model\Layout $this */
 /** @var System\Model\Collection $videos */
-/** @var int $pageCount */
 ?>
-<?= $this->renderTemplate("header")  ?>
-<div class="toolbar">
-    <div class="filter">
-        <a href="?filter=today_released">Today Released</a>
-    </div>
-    <?php $pagination = $this->renderTemplate('pagination', ['maxPage' => round($videos->count() / $pageCount)]) ?>
-    <?= $pagination ?>
-</div>
 <div class="list">
     <?php /** @var \Video\Model\Video $video */ ?>
     <?php foreach ($videos as $video): ?>
         <div class="item video-item">
-            <a href="<?= $video->getUrl() ?>" target="_blank">
+            <a href="<?= $video->getUrl() ?>">
                 <img class="loading" src="<?= $video->getPosterUrl() ?>" />
             </a>
             <p class="date"><?= substr($video->getDate(), 0, 10) ?></p>
@@ -23,5 +14,3 @@
         </div>
     <?php endforeach ?>
 </div>
-<?= $pagination ?>
-<?= $this->renderTemplate("footer") ?>

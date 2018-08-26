@@ -2,6 +2,7 @@
 /** @var System\Model\Layout $this */
 /** @var Video\Model\Video $video */
 /** @var bool $isFavoriteVideo */
+/** @var \System\Model\Collection $actresses */
 ?>
 <?= $this->renderTemplate("header")  ?>
     <div class="video">
@@ -30,8 +31,16 @@
                 </div>
             </div>
         </div>
-        <div class="actress">
-
+        <p>Actress</p>
+        <div class="actresses">
+            <?php /** @var \Video\Model\Actress $actress */ ?>
+            <?php foreach($actresses as $actress): ?>
+                <div class="actress">
+                    <a href="<?= '/actress/' . $actress->getId() ?>">
+                        <img class="avatar" src="<?= $actress->getAvatarUrl() ?>"/>
+                    </a>
+                </div>
+            <?php endforeach ?>
         </div>
         <p>Video Samples</p>
         <ul class="samples">

@@ -34,10 +34,13 @@ class ViewController extends AbstractController
             ->where(['video_id' => $video->getId()]);
         $isFavoriteVideo = $favoriteVideos->count() > 0;
 
+        $actresses = $video->getActresses();
+
         return $this->layout->renderTemplate($this->template,
             [
                 'video' => $video,
-                'isFavoriteVideo' => $isFavoriteVideo
+                'isFavoriteVideo' => $isFavoriteVideo,
+                'actresses' => $actresses,
             ]
         );
     }

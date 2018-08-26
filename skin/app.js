@@ -4,42 +4,22 @@
 
 var maskEl = $('#mask');
 
-$('img').on('load', function () {
-    $(this).addClass('loaded');
+/* ---------------------------------------- Toolbar ---------------------------------------- */
+var toolbarEl = $('.toolbar');
+toolbarEl.find('.new-video').submit(function (e) {
+    e.preventDefault();
+    var form = e.currentTarget;
+    $.post(
+        form.action,
+        {'identifier': $(form).find(':input[name=identifier]'), 'origin_href': $(form).find(':input[name=origin_href]')},
+        function(data,status,xhr) {
+            console.log(data);
+        }
+    );
 });
 
 /* ---------------------------------------- Video List ---------------------------------------- */
 var videoListEl = $(".list");
-// $(document).ready(function () {
-//     if (videoListEl.length > 0) {
-//         var loading = false;
-//         var load = function () {
-//             var windowScrollTop = $(window).scrollTop();
-//             var windowBottom = windowScrollTop + window.innerHeight;
-//             var items = videoListEl.find(".item:not(.loaded)");
-//             for(var i = 0; i < items.length; i++) {
-//                 var item = $(items[i]);
-//                 if (item.offset().top < windowBottom + 500) {
-//                     var img = item.find('img');
-//                     img.attr("src", img.data('src'));
-//                 } else {
-//                     break;
-//                 }
-//             }
-//         };
-//         load();
-//         $(window).scroll(function () {
-//             if (loading) {
-//                 return;
-//             }
-//             loading = true;
-//             load();
-//             setTimeout(function () {
-//                 loading = false;
-//             }, 500);
-//         })
-//     }
-// })
 
 
 /* ---------------------------------------- Video Detail Page ---------------------------------------- */
@@ -88,14 +68,29 @@ sampleViewer.find('button.nav').click(function () {
 sampleViewer.find(".close").click(closeSampleViewer);
 
 // like
-var likeButton = videoEl.find('.actions .like');
-likeButton.click(function (e) {
-    var data = {'video_id' : window.video.id, 'cancel': $(this).hasClass('active') ? 1 : 0};
+var videoLikeButton = videoEl.find('.actions .like');
+videoLikeButton.click(function () {
+    var data = {'video_id' : window.video.id, 'cancel' : $(this).hasClass('active') ? 1 : 0};
     $.post(
         '/user/favorite/video/post',
         data,
         function(data,status,xhr) {
-            likeButton.toggleClass('active');
+            videoLikeButton.toggleClass('active');
+        }
+    )
+});
+
+/* ---------------------------------------- Actress Detail Page ---------------------------------------- */
+var actressEl = $('.actress-view');
+// like
+var actressLikeButton = actressEl.find('.actions .like');
+actressLikeButton.click(function () {
+    var data = {'actress_id' : window.actress_id, 'cancel' : $(this).hasClass('active') ? 1 : 0};
+    $.post(
+        '/user/favorite/actress/post',
+        data,
+        function(data,status,xhr) {
+            actressLikeButton.toggleClass('active');
         }
     )
 });

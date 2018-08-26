@@ -1,0 +1,16 @@
+<?php
+/** @var System\Model\Layout $this */
+/** @var System\Model\Collection $actresses */
+/** @var int $pageCount */
+?>
+<?= $this->renderTemplate("header")  ?>
+    <div class="toolbar">
+        <div class="actions">
+
+        </div>
+        <?php $pagination = $this->renderTemplate('pagination', ['maxPage' => round($actresses->count() / $pageCount)]) ?>
+        <?= $pagination ?>
+    </div>
+<?= $this->renderTemplate('actress_list', ['actresses' => $actresses]) ?>
+<?= $pagination ?>
+<?= $this->renderTemplate("footer") ?>

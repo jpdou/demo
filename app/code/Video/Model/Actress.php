@@ -9,17 +9,22 @@
 namespace Video\Model;
 
 use System\Model\AbstractModel;
+use System\Model\Config;
 use System\Model\Db;
 use System\Model\ObjectManager;
 
 class Actress extends AbstractModel
 {
+    private $config;
+
     public function __construct(
         ObjectManager $objectManager,
+        Config $config,
         Db $db
     ) {
         parent::__construct($objectManager);
         $this->table = 'actress';
+        $this->config = $config;
     }
 
     /**
@@ -33,7 +38,7 @@ class Actress extends AbstractModel
         $select = $collection->getSelect();
 
         $select->join(
-            ['actress_video'],
+            'actress_video',
             'e.id=actress_video.video_id',
             []
         )->where('actress_video.actress_id='. $this->getId());
@@ -41,9 +46,9 @@ class Actress extends AbstractModel
         return $collection;
     }
 
-    public function getId()
+    public function getUrl()
     {
-        return (int) $this->getData('id');
+        return '/actress/' . $this->getId();
     }
 
     public function getName()
@@ -54,6 +59,12 @@ class Actress extends AbstractModel
     public function getAvatar()
     {
         return $this->getData('avatar');
+    }
+
+    public function getAvatarUrl()
+    {
+        $avatar = $this->getAvatar() ? : '404.jpg';
+        return $this->config->getConfig('directories')['media']. $avatar;
     }
 
     public function getHomePage()
